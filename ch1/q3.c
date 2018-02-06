@@ -11,20 +11,9 @@ checksum(检查和)用一个singed char类型的变量进行计算，它初始�
 int main()
 {
 	char *p;
-	printf("继续输入行请输入１\n");
-	scanf("%d",&i);
-	if(i==1)
-	{
-		count++;
-		printf("请输入行\n");
-		scanf("%s",p);
-		printf("%d %s\n",count,p);
-		i=0;
-	}
-	else
-	{
-		;
-	}
+	printf("请输入:\n");
+	scanf("%s",p);
+	printf("%s\n",p);
 
 
 	return 0;
