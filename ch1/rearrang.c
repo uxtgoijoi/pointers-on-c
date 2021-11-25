@@ -17,11 +17,9 @@
 #define	MAX_INPUT	1000	/* max len of input & output lines */
 
 int	read_column_numbers( int columns[], int max );
-void	rearrange( char *output, char const *input,
-	    int n_columns, int const columns[] );
+void rearrange( char *output, char const *input, int n_columns, int const columns[] );
 
-int
-main( void )
+int main( void )
 {
 	int	n_columns;		/* # of columns to process */
 	int	columns[MAX_COLS];	/* the columns to process */
@@ -49,8 +47,7 @@ main( void )
 ** Read the list of column numbers, ignoring any beyond the specified
 ** maximum.
 */
-int
-read_column_numbers( int columns[], int max )
+int read_column_numbers( int columns[], int max )
 {
 	int	num = 0;
 	int	ch;
@@ -58,9 +55,11 @@ read_column_numbers( int columns[], int max )
 	/*
 	** Get the numbers, stopping at eof or when a number is < 0.
 	*/
+	printf("input a index a time, the number of indexs is even, stop when a number is < 0\n");
 	while( num < max && scanf( "%d", &columns[num] ) == 1
 	    && columns[num] >= 0 )
 		num += 1;
+	// scanf写在循环中，无提示，程序执行起来不可理解
 
 	/*
 	** Make sure we have an even number of inputs, as they are
@@ -76,8 +75,10 @@ read_column_numbers( int columns[], int max )
 	** number.
 	*/
 	while( (ch = getchar()) != EOF && ch != '\n' )
+	{
 		;
-
+	}
+		
 	return num;
 }
 
@@ -85,9 +86,7 @@ read_column_numbers( int columns[], int max )
 ** Process a line of input by concatenating the characters from
 ** the indicated columns.  The output line is then NUL terminated.
 */
-void
-rearrange( char *output, char const *input,
-    int n_columns, int const columns[] )
+void rearrange( char *output, char const *input, int n_columns, int const columns[] )
 {
 	int	col;		/* subscript for columns array */
 	int	output_col;	/* output column counter */
@@ -100,7 +99,7 @@ rearrange( char *output, char const *input,
 	** Process each pair of column numbers.
 	*/
 	for( col = 0; col < n_columns; col += 2 ){
-		int	nchars = columns[col + 1] - columns[col] + 1;
+		int	nchars = columns[col + 1] - columns[col] + 1;  //一对下标间的字符数
 
 		/*
 		** If the input line isn't this long or the output
@@ -118,7 +117,7 @@ rearrange( char *output, char const *input,
 			nchars = MAX_INPUT - output_col - 1;
 
 		/*
-		** Copy the relevant data.
+		** Copy the relevant data. char *strncpy(char *dest, const char *src, int n)，表示把src所指向的字符串中 以src地址开始的 前n个字节 复制到dest所指的数组中，并返回被复制后的dest
 		*/
 		strncpy( output + output_col, input + columns[col],
 		    nchars );
